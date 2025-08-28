@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router'; // Adicione RouterModule
+import { Router, RouterModule } from '@angular/router';
 import { ServicoAutenticacao } from '../../servicos/servico-autenticacao';
 import { Usuario } from '../../modelos/modelo-usuario';
 
@@ -19,13 +19,13 @@ export class NavegacaoComponent {
     private router: Router
   ) {}
 
-  ngOnInit(): void {
+  ngDoCheck(): void {
     this.usuarioLogado = this.servicoAutenticacao.getUsuarioLogado();
   }
 
   logout(): void {
     this.servicoAutenticacao.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 
   isRotaAtiva(rota: string): boolean {

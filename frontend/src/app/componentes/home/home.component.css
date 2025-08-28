@@ -1,0 +1,18 @@
+.home-container {
+  text-align: center;
+  margin-top: 40px;
+  background: var(--cinza-militar);
+  min-height: 80vh;
+}
+.colagem-imagem {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+.colagem-img {
+  max-width: 600px;
+  width: 100%;
+  border: 4px solid var(--azul-pmerj);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}

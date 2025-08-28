@@ -6,6 +6,7 @@ import { ChatComponent } from './componentes/chat/chat.component';
 import { PerfilComponent } from './componentes/perfil/perfil.component';
 import { AdminComponent } from './componentes/admin/admin.component';
 import { AuthGuard } from './guards/auth.guard';
+import { HomeComponent } from './componentes/home/home.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
-  { path: '', redirectTo: '/feed', pathMatch: 'full' },
-  { path: '**', redirectTo: '/feed' }
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home' }
 ];

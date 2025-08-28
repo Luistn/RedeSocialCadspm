@@ -2,18 +2,26 @@
   <div class="logo">
     <h2>Rede Social do Curso</h2>
   </div>
-  
+
   <div class="menu" *ngIf="usuarioLogado">
-    <a routerLink="/feed" [class.ativo]="isRotaAtiva('feed')">feed</a>
+    <a routerLink="/feed" [class.ativo]="isRotaAtiva('feed')">Feed</a>
     <a routerLink="/forum" [class.ativo]="isRotaAtiva('forum')">Fórum</a>
     <a routerLink="/chat" [class.ativo]="isRotaAtiva('chat')">Chat</a>
     <a routerLink="/perfil" [class.ativo]="isRotaAtiva('perfil')">Perfil</a>
     <a routerLink="/admin" [class.ativo]="isRotaAtiva('admin')" *ngIf="usuarioLogado.isAdmin">Admin</a>
   </div>
-  
+
   <div class="usuario" *ngIf="usuarioLogado">
     <img [src]="usuarioLogado.avatar" alt="Avatar" class="avatar">
     <span>Olá, {{usuarioLogado.nome}}</span>
-    <button (click)="logout()">Sair</button>
+    <button (click)="logout()">
+      <i class="fa fa-sign-out-alt"></i> Sair
+    </button>
+  </div>
+
+  <div class="login-btn" *ngIf="!usuarioLogado">
+    <button routerLink="/login">
+      <i class="fa fa-sign-in-alt"></i> Login
+    </button>
   </div>
 </nav>
