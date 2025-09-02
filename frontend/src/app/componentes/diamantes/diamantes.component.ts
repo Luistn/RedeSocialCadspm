@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-diamantes',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './diamantes.component.html',
   styleUrls: ['./diamantes.component.css']
 })
