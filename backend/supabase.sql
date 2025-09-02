@@ -120,6 +120,10 @@ DO $$ BEGIN
     CREATE POLICY "Usuários autenticados podem enviar mensagens" ON public.mensagens FOR INSERT WITH CHECK (auth.role() = 'authenticated' and auth.uid() = remetente_id);
 EXCEPTION WHEN duplicate_object THEN NULL; END $$;
 
+DO $$ BEGIN
+    CREATE POLICY "Usuários podem deletar mensagens da conversa" ON public.mensagens FOR DELETE USING (auth.uid() = remetente_id OR auth.uid() = destinatario_id);
+EXCEPTION WHEN duplicate_object THEN NULL; END $$;
+
 -- Policies para likes
 DO $$ BEGIN
     CREATE POLICY "Qualquer um pode ver likes" ON public.likes FOR SELECT USING (true);

@@ -60,6 +60,27 @@ export class ChatComponent {
     }
   }
 
+
+
+  deletarConversa(): void {
+    if (!this.usuarioSelecionado || !this.usuarioLogado) return;
+    if (!confirm(`Deseja realmente excluir toda a conversa com ${this.usuarioSelecionado.nome}?`)) return;
+    const otherId = this.usuarioSelecionado.id;
+    this.servicoDados.deletarConversa(otherId).subscribe({
+      next: () => {
+        // remover mensagens e usuário selecionado da UI
+        this.mensagens = [];
+        // atualizar lista de usuários local para remover o contato
+        this.usuarios = this.usuarios.filter(u => u.id !== otherId);
+        this.usuarioSelecionado = null;
+      },
+      error: (err) => {
+        console.error('Erro ao deletar conversa', err);
+        alert('Erro ao deletar conversa');
+      }
+    });
+  }
+
   formatarData(data: Date): string {
     return new Date(data).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
   }

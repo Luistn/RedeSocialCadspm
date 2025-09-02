@@ -3,13 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ServicoAutenticacao } from '../../servicos/servico-autenticacao';
 import { Usuario } from '../../modelos/modelo-usuario';
 import { FormsModule } from '@angular/forms';
-import { NavegacaoComponent } from '../navegacao/navegacao.component';
-import { LoginComponent } from '../login/login.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, NavegacaoComponent, LoginComponent],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })

@@ -216,4 +216,10 @@ export class ServicoDados {
     return this.http.post<any>(`${environment.apiUrl}/chat/${destinatarioId}/messages`, { conteudo }, { headers: this.headers() })
       .pipe(map(r => new Mensagem(r.id, remetente.id, remetente.nome, r.destinatario_id, r.conteudo, new Date(r.created_at), r.lida)));
   }
+
+
+
+  deletarConversa(otherUserId: string): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/chat/${otherUserId}`, { headers: this.headers() });
+  }
 }

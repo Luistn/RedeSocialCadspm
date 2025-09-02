@@ -1,1 +1,53 @@
-<div class="container py-5"><!-- vazio intencionalmente --></div>
+
+
+<div class="container py-5">
+  <!-- Formulário para adicionar nova foto -->
+  <form (submit)="adicionarFoto()" class="mb-4 d-flex gap-2 align-items-center">
+    <input
+      type="text"
+      [(ngModel)]="novaFotoUrl"
+      name="novaFotoUrl"
+      class="form-control"
+      placeholder="URL da nova foto"
+      required
+    />
+    <input
+      type="text"
+      [(ngModel)]="novaDescricao"
+      name="novaDescricao"
+      class="form-control"
+      placeholder="Descrição curta"
+      maxlength="60"
+      required
+    />
+    <button type="submit" class="btn btn-primary">Adicionar foto</button>
+  </form>
+
+  <!-- Carrossel dinâmico -->
+  <div class="carousel">
+    <div
+      class="carousel-inner"
+      [style.transform]="'translateX(-' + carouselIndex * 100 + '%)'"
+    >
+      <img
+        *ngFor="let foto of fotos.slice(0, 5)"
+        [src]="foto.url"
+        class="carousel-img"
+        [alt]="foto.descricao"
+      />
+    </div>
+  </div>
+
+  <!-- Cards dinâmicos -->
+  <div class="row mt-5">
+    <div class="col-md-3 mb-4" *ngFor="let foto of fotos; let idx = index">
+      <div class="card h-100 shadow-sm">
+        <img [src]="foto.url" class="card-img-top" [alt]="foto.descricao" />
+        <div class="card-body">
+          <h5 class="card-title">Foto {{ idx + 1 }}</h5>
+          <p class="card-text">{{ foto.descricao }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

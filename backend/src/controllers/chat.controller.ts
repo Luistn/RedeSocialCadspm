@@ -51,3 +51,25 @@ export const sendMessage = async (req: Request, res: Response) => {
     res.status(500).json({ erro: e.message });
   }
 };
+
+// DELETE /api/chat/:otherUserId  -> remove todas as mensagens entre user e otherUserId
+export const deleteConversation = async (req: Request, res: Response) => {
+  try {
+    const user = (req as any).user;
+    if (!user) return res.status(401).json({ erro: 'Não autenticado' });
+    const { otherUserId } = req.params;
+    if (!otherUserId) return res.status(400).json({ erro: 'Parâmetro otherUserId obrigatório' });
+
+  console.log(`[CHAT] deleteConversation requested by user=${user.id} otherUser=${otherUserId}`);
+
+    const authed = getAuthedClient(req);
+    // delete where remetente=user and destinatario=other OR remetente=other and destinatario=user
+    const { error } = await authed.from('mensagens')
+      .delete()
+      .or(`and(remetente_id.eq.${user.id},destinatario_id.eq.${otherUserId}),and(remetente_id.eq.${otherUserId},destinatario_id.eq.${user.id})`);
+    if (error) return res.status(400).json({ erro: error.message });
+    res.status(204).send();
+  } catch (e: any) {
+    res.status(500).json({ erro: e.message });
+  }
+};

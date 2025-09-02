@@ -38,6 +38,9 @@
           <span class="ms-1">{{usuarioSelecionado.isOnline ? 'Online' : 'Offline'}}</span>
         </span>
       </div>
+      <div class="acoes-cabecalho ms-auto" *ngIf="usuarioLogado">
+        <button class="btn btn-sm btn-danger" (click)="deletarConversa()">Excluir conversa</button>
+      </div>
     </div>
 
     <div class="mensagens">
@@ -48,6 +51,7 @@
           <p>{{mensagem.conteudo}}</p>
           <span class="hora">{{formatarData(mensagem.data)}}</span>
         </div>
+
       </div>
     </div>
 
